@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<!--
+  Jewish Changemakers Steering Committee
+  Pre-reading for Session 2 on September 24, 2026.
+
+  VERSION
+  v5, built September 16, 2026 from v3_5. Session 1 is closed and summarised,
+  Session 2 is unlocked and its agenda is written, and the pre-reading has been
+  rebuilt around what happens after the Fellowship ends. v3_5 is unchanged and
+  remains the record of the pre-Session-1 page.
+
+  FOR WHOEVER PUBLISHES THIS
+  - One file. Nothing to upload alongside it. Both logos are embedded, the
+    fonts come from Google Fonts, and there is no build step and no framework.
+  - It is meant to live at a private, unlisted path. The robots meta tag below
+    keeps it out of search results; please leave it in place.
+  - Publish this at a NEW filename rather than replacing the previous file at
+    the same address. The CDN served a stale copy last time a file was
+    replaced in place, and this link goes out in an email.
+  - One line still needs a real URL. Once the final address exists, uncomment
+    the og:image tag in the head and point it at a 1200x630 image. Without it
+    the link still works, it just previews as plain text in Outlook.
+  - Nothing here writes to a database, a cookie, or browser storage.
+
+  UPDATING IT AFTER SESSION 2
+  One edit, at the very bottom of the script: uncomment the markComplete(2,
+  {...}) call and fill it in. That flips the Session 2 badge to Complete,
+  strikes the date in the masthead, and renders the summary block inside the
+  Session 2 card. The markComplete(1, {...}) call above it is already live and
+  should be left alone.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Keep this line. It is what keeps the page out of search results. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#27277C">
+<meta name="description" content="Pre-reading for Session 2 of the Jewish Changemakers Steering Committee, September 24, 2026.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jewish Changemakers Steering Committee">
+<meta property="og:description" content="Pre-reading for Session 2 of the Jewish Changemakers Steering Committee, September 24, 2026.">
+<meta property="og:site_name" content="Jewish Changemakers">
+<!-- og:image needs an absolute URL and cannot be inlined, so it waits on
+     hosting being settled. Add it here once the final URL exists:
+     <meta property="og:image" content="https://YOURDOMAIN/og-image.png"> -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Jewish Changemakers Steering Committee">
+<meta name="twitter:description" content="Pre-reading for Session 2 of the Jewish Changemakers Steering Committee, September 24, 2026.">
+<title>Jewish Changemakers Steering Committee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Outfit only. The brand guide specifies Outfit SemiBold for headings and Outfit Light for body. -->
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════════
+     Colors and type are taken from the Jewish Changemakers
+     Brand & Style Guide (2023). Hex values are the guide's, unchanged.
+     Navy, Dark Grey and Off-White carry the structure. Teal, Mint,
+     Magenta, Coral and Pink carry emphasis only.
+     ═══════════════════════════════════════════════════════════════ */
+  :root {
+    /* primary */
+    --navy: #27277C;
+    --grey: #2A2A2A;
+    --off-white: #F5F5F5;
+    --teal: #1EAF90;
+    --mint: #6DE6CC;
+    --teal-light: #CEF6EE;
+
+    /* secondary, used for emphasis and for distinguishing the six weeks */
+    --magenta: #CD31CD;
+    --purple: #942494;
+    --pink: #EC4E75;
+    --coral: #F8785B;
+    --orange: #F6471F;
+    --deep-red: #CC1543;
+
+    /* text and rules, derived from Dark Grey so every value clears WCAG AA */
+    --ink: #2A2A2A;         /* 13.9:1 on white */
+    --ink-mid: #4F4F4F;     /*  8.5:1 */
+    --ink-soft: #6E6E78;    /*  5.1:1 */
+    --rule: #DCDCDC;
+    --rule-soft: #EAEAEA;
+    --paper: #FFFFFF;
+
+    /* v5 accent. The pre-Session-1 page ran on the primary teal throughout.
+       This version moves every light-surface accent onto the secondary
+       palette, which the brand guide defines as the source of the gradient
+       family, so the page reads as a new edition without leaving the brand.
+       Navy and mint stay put on the navy surfaces, which is the guide's own
+       pairing and the strongest contrast available there. */
+    --accent: #CC1543;         /* secondary, deep red */
+    --accent-deep: #942494;    /* secondary, purple */
+    --accent-tint: #FDE8EC;    /* accent at ~8%, for chips and fills */
+    --accent-rule: #F2C4CF;    /* accent at ~28%, for hairlines */
+    --grad: linear-gradient(90deg, #CC1543 0%, #F6471F 28%, #F8785B 52%, #CD31CD 78%, #942494 100%);
+
+    --sans: 'Outfit', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --measure: 36rem;
+    --t: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    font-weight: 300;              /* Outfit Light, per the guide */
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.4;              /* body leading 1.4x, per the guide */
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    .reveal { opacity: 1 !important; transform: none !important; }
+  }
+  /* Navy focus ring: 11.9:1 on white, so it is visible for everyone. */
+  :focus-visible { outline: 3px solid var(--navy); outline-offset: 3px; }
+  .masthead :focus-visible, .foot :focus-visible { outline-color: var(--mint); }
+
+  /* Press feedback fires on pointer-down, not on release. Without this every
+     control feels a frame behind the finger. Transform-only so it stays on
+     the compositor, and short enough to read as contact rather than motion. */
+  .btn:active,
+  .card-btn:active,
+  .rail-btn:active,
+  details.more > summary:active,
+  .ses:active,
+  .nav-links a:active {
+    transform: scale(0.985);
+    transition: transform 90ms ease-out;
+  }
+  .card.locked .card-btn:active { transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .btn:active, .card-btn:active, .rail-btn:active,
+    details.more > summary:active, .ses:active, .nav-links a:active { transform: none; }
+  }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 30px; }
+  @media (max-width: 620px) { .wrap { padding: 0 20px; } }
+
+  /* Outfit SemiBold. Tracking is set per size rather than once: letters read
+     too far apart as display type grows and too tight as label type shrinks,
+     so one value is always wrong at one end. */
+  h1, h2, h3, h4, h5 { font-weight: 600; letter-spacing: -0.018em; }
+  .band-title, .mast-h1 span { letter-spacing: -0.024em; }
+  .col h4, .heard .hlabel, .so-tag, .mode h5, .wk-n, .readout .k,
+  .rail-label, .card-num, .badge, .label { letter-spacing: 0; }
+
+  /* ─────────── MASTHEAD ─────────── */
+  .masthead { background: var(--navy); color: #fff; padding: 26px 0 24px; position: relative; }
+  /* The gradient belongs in shapes and vectors per the brand guide, so it
+     appears once, as a hairline holding the masthead down. */
+  .masthead::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 0;
+    height: 4px; background: var(--grad);
+  }
+  .mast-top {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 28px; flex-wrap: wrap;
+  }
+  /* LOGO: Primary Light main logo, lifted from the brand guide (page 5) with
+     its own alpha channel intact, so it sits on the navy with no seam and no
+     matte. The footer mark is the Powered by lockup from page 7, dark-background
+     variant. Both are inlined, which is why this file has no assets folder.
+     .mast-logo-print is the print fallback: both assets are cut for a dark
+     background and would vanish against printed white. */
+  .mast-h1 { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .mast-logo { height: 34px; width: auto; display: block; }
+  .mast-logo-print { display: none; }
+  .mast-h1 span {
+    font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+    font-weight: 600; line-height: 1.1; color: var(--mint); white-space: nowrap;
+  }
+
+  .mast-sessions { display: flex; flex-shrink: 0; }
+  .ses { padding: 0 18px; border-left: 1px solid rgba(255,255,255,0.2); text-decoration: none; display: block; }
+  .ses:first-child { padding-left: 0; border-left: none; }
+  .ses-k {
+    display: block; font-size: 0.68rem; font-weight: 600;
+    color: rgba(255,255,255,0.55); margin-bottom: 2px;
+  }
+  .ses-d { display: block; font-size: 0.88rem; font-weight: 400; color: rgba(255,255,255,0.72); white-space: nowrap; }
+  .ses.current .ses-k { color: var(--mint); }
+  .ses.current .ses-d { color: #fff; font-weight: 500; }
+  .ses.done .ses-k { color: var(--mint); }
+  .ses.done .ses-d { text-decoration: line-through; text-decoration-color: rgba(255,255,255,0.4); }
+
+  .mast-line {
+    font-size: 1.08rem; line-height: 1.45; font-weight: 300;
+    color: rgba(255,255,255,0.82);
+    max-width: 44rem; padding-top: 18px; margin-top: 18px;
+    border-top: 1px solid rgba(255,255,255,0.18);
+  }
+  /* Dateline, not a badge: restraint calls for typography over pill/chip
+     chrome, and this needs to read as fact ("here is the assignment"),
+     not as a CTA competing with the actual buttons further down the page. */
+  @media (max-width: 820px) {
+    .mast-top { flex-direction: column; align-items: flex-start; gap: 18px; }
+    .mast-sessions { width: 100%; }
+    .ses { flex: 1; padding: 0 14px; }
+  }
+  /* Two nowrap date strings side by side overflow a 360px viewport and make
+     the whole page scroll sideways. Below this width they stack instead. */
+  @media (max-width: 430px) {
+    .mast-sessions { flex-direction: column; gap: 12px; }
+    .ses { padding: 0; border-left: none; }
+    .ses + .ses { padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.2); }
+  }
+
+  /* ─────────── STICKY NAV ─────────── */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.72);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+    transform: translateY(-100%); transition: transform var(--t);
+  }
+  /* Translucency is decorative, so it degrades to a solid bar rather than
+     costing legibility for anyone who has asked for less of it. */
+  @media (prefers-reduced-transparency: reduce) {
+    .nav { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+  @media (prefers-contrast: more) {
+    .nav { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom-color: var(--navy); }
+  }
+  /* A floating translucent layer gets a soft edge where it meets content,
+     not a hairline rule, which would read as a seam in a solid bar. */
+  .nav::after {
+    content: ''; position: absolute; left: 0; right: 0; top: 100%; height: 14px;
+    background: linear-gradient(to bottom, rgba(39,39,124,0.055), rgba(39,39,124,0));
+    pointer-events: none;
+  }
+  @media (prefers-contrast: more) { .nav::after { display: none; } .nav { border-bottom: 1px solid var(--navy); } }
+  .nav.visible { transform: translateY(0); }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; padding-top: 11px; padding-bottom: 11px; gap: 20px; }
+  .nav-mark { font-size: 0.85rem; font-weight: 600; color: var(--navy); }
+  .nav-links { display: flex; gap: 22px; }
+  .nav-links a { font-size: 0.85rem; font-weight: 400; color: var(--ink-mid); text-decoration: none; transition: color var(--t); }
+  .nav-links a:hover { color: var(--navy); text-decoration: underline; }
+  @media (max-width: 620px) { .nav-mark { display: none; } .nav .wrap { justify-content: center; } }
+
+  /* ─────────── SECTION SHELL ─────────── */
+  .band { padding: 56px 0; }
+  /* the sticky bar is ~46px, so anchored sections and the tab rail stop short
+     of it instead of arriving underneath it */
+  #context, #ask, #agenda { scroll-margin-top: 62px; }
+  .rail-btn { scroll-margin-top: 70px; }
+  .band-alt { background: var(--off-white); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .band-title {
+    font-size: clamp(1.45rem, 2.9vw, 2rem);
+    line-height: 1.1; color: var(--navy); margin-bottom: 10px;
+  }
+  .band-sub { font-size: 1.05rem; line-height: 1.45; color: var(--ink-mid); max-width: 42rem; }
+  .stamp {
+    display: inline-block; font-size: 0.8rem; font-weight: 600; color: var(--navy);
+    background: var(--accent-tint); padding: 5px 12px; border-radius: 999px; margin-bottom: 14px;
+  }
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.45s ease, transform 0.45s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* section label. Title Case, SemiBold, no wide letterspacing. */
+  .label {
+    font-size: 0.78rem; font-weight: 600; color: var(--ink-soft);
+    padding-bottom: 7px; border-bottom: 1px solid var(--rule); margin: 30px 0 16px;
+  }
+
+  /* ─────────── CONTEXT READER ─────────── */
+  .reader { margin-top: 34px; display: grid; grid-template-columns: 232px 1fr; gap: 46px; align-items: start; }
+  @media (max-width: 900px) { .reader { grid-template-columns: 1fr; gap: 20px; } }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+
+  .rail { position: sticky; top: 64px; border-top: 2px solid var(--navy); }
+  .rail-btn {
+    font-family: var(--sans);
+    width: 100%; text-align: left; background: none; border: none;
+    border-bottom: 1px solid var(--rule-soft);
+    padding: 12px 4px 12px 13px; cursor: pointer; position: relative;
+    display: flex; align-items: center; gap: 11px;
+    color: var(--ink-mid); transition: color var(--t);
+  }
+  .rail-btn:hover { color: var(--navy); }
+  /* Reading progress: three quiet states, distinguished by shape and fill,
+     not color alone, and confirmed for screen readers via .sr-only text.
+     Not a progress bar, just orientation ("I've moved through 2 of 4"). */
+  .rail-num {
+    display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+    width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid var(--rule);
+    font-size: 0.68rem; font-weight: 700; font-variant-numeric: tabular-nums;
+    color: var(--ink-soft); background: transparent;
+    transition: color var(--t), background var(--t), border-color var(--t);
+  }
+  .rail-btn.visited .rail-num { background: var(--accent-tint); border-color: var(--accent-rule); color: var(--navy); }
+  .rail-label { font-size: 0.92rem; font-weight: 400; line-height: 1.25; }
+  .rail-btn[aria-selected="true"] { color: var(--navy); }
+  .rail-btn[aria-selected="true"] .rail-label { font-weight: 600; color: var(--navy); }
+  .rail-btn[aria-selected="true"] .rail-num { background: var(--navy); border-color: var(--navy); color: #fff; }
+  /* A single marker that moves from the tab you left to the tab you chose.
+     Five separate bars growing in place connect nothing to nothing. */
+  .rail-ind {
+    position: absolute; left: 0; top: 0; width: 3px; height: 0;
+    background: var(--navy); border-radius: 2px; pointer-events: none;
+    transition: transform 0.34s cubic-bezier(0.2,0,0,1), height 0.34s cubic-bezier(0.2,0,0,1);
+  }
+  @media (max-width: 900px) {
+    .rail-ind { top: auto; bottom: 0; left: 0; width: 0; height: 2px;
+      transition: transform 0.34s cubic-bezier(0.2,0,0,1), width 0.34s cubic-bezier(0.2,0,0,1); }
+    .rail {
+      /* relative so the travelling indicator can anchor to it, and top reset
+         because the desktop rule is sticky with top:64px, which on a relative
+         box paints the rail 64px down over the panel instead of pinning it */
+      position: relative; top: auto; border-top: none; display: flex; gap: 6px;
+      overflow-x: auto; padding-bottom: 6px;
+      scroll-snap-type: x proximity;
+      scrollbar-width: none;
+      /* Fade whichever edge still has tabs behind it. Classes are set in JS,
+         so the fade never appears on a side with nothing left to reach. */
+      -webkit-mask-image: var(--rail-mask, none);
+      mask-image: var(--rail-mask, none);
+    }
+    .rail::-webkit-scrollbar { display: none; }
+    .rail.more-right { --rail-mask: linear-gradient(to right, #000 calc(100% - 42px), transparent 100%); }
+    .rail.more-left  { --rail-mask: linear-gradient(to right, transparent 0, #000 42px); }
+    .rail.more-left.more-right { --rail-mask: linear-gradient(to right, transparent 0, #000 42px, #000 calc(100% - 42px), transparent 100%); }
+    .rail-btn { scroll-snap-align: start; }
+  }
+  @media (max-width: 900px) {
+    .rail-btn { width: auto; white-space: nowrap; border-bottom: 2px solid transparent; background: var(--off-white); padding: 8px 13px; }
+    .rail-btn::after { display: none; }
+    .rail-btn[aria-selected="true"] { border-bottom-color: var(--navy); background: var(--accent-tint); }
+  }
+  /* Touch sizing applies only to coarse pointers, so the desktop layout the
+     committee reviewed keeps its exact original geometry. */
+  @media (pointer: coarse) {
+    .rail-btn { min-height: 44px; }
+    details.more > summary { min-height: 44px; display: flex; align-items: center; }
+    .ses { min-height: 44px; display: flex; flex-direction: column; justify-content: center; }
+    /* Padding with matching negative margin, so the fixed bar doesn't grow
+       from 42px to 66px and eat the viewport. */
+    .nav-links a { padding: 13px 0; margin: -13px 0; }
+    .nav-links { gap: 20px; }
+  }
+
+  .stage { min-height: 420px; }
+  @media (max-width: 900px) { .stage { min-height: 0; } }
+  /* Panels differ in height by hundreds of pixels, so a bare display swap
+     jumps everything below the reader. The stage height is sprung between the
+     two measured heights instead, and the panels cross-fade. */
+  .stage { position: relative; }
+  .stage.morphing { overflow: hidden; }
+  .panel { display: none; opacity: 1; transition: opacity 0.16s ease; }
+  .panel.active { display: block; }
+  .panel.entering { opacity: 0; }
+  .panel:focus { outline: none; }
+
+  .panel h3 {
+    font-size: clamp(1.5rem, 3.1vw, 2.1rem);
+    line-height: 1.1; color: var(--navy); margin-bottom: 18px; max-width: 24ch;
+  }
+  .panel p { font-size: 1.06rem; line-height: 1.45; color: var(--ink); margin-bottom: 14px; max-width: var(--measure); }
+  .panel p:last-child { margin-bottom: 0; }
+
+  .pull {
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    font-weight: 500; line-height: 1.2;   /* subhead leading 1.2x */
+    color: var(--navy);
+    border-left: 3px solid var(--magenta);
+    padding-left: 20px; margin: 26px 0 0; max-width: 32rem;
+  }
+
+  .flat { list-style: none; max-width: var(--measure); }
+  .flat li { font-size: 1.02rem; line-height: 1.45; color: var(--ink); padding: 11px 0; border-bottom: 1px solid var(--rule-soft); }
+  .flat li:last-child { border-bottom: none; }
+  .flat li b { font-weight: 600; color: var(--navy); }
+
+  /* Row list: a connecting spine down the left edge with a colored,
+     numbered node per row. Built for the six-week curriculum arc in the
+     pre-Session-1 page; reused here for the three alumni tracks, where
+     the spine reads as "these belong together" rather than as a sequence.
+     .wk-tag is kept for rows that need a label prefix. */
+  .weeks { list-style: none; position: relative; padding-left: 44px; }
+  .weeks::before {
+    content: ''; position: absolute; left: 20px; top: 14px; bottom: 14px;
+    width: 0; border-left: 2px solid var(--rule); z-index: 0;
+  }
+  .wk { position: relative; padding: 14px 0; border-bottom: 1px solid var(--rule-soft); }
+  .wk:last-child { border-bottom: none; }
+  .wk-node {
+    position: absolute; left: -44px; top: 14px; z-index: 1;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--off-white); border: 2.5px solid var(--wkc, var(--navy));
+    display: flex; align-items: center; justify-content: center;
+  }
+  .wk-node span { font-size: 0.74rem; font-weight: 700; color: var(--navy); font-variant-numeric: tabular-nums; }
+  .wk-row-content { display: flex; gap: 20px; }
+  .wk-meta { flex: 0 0 152px; }
+  .wk-n { display: block; font-size: 0.74rem; font-weight: 600; color: var(--ink-soft); margin-bottom: 2px; }
+  .wk-t { display: block; font-size: 0.97rem; font-weight: 600; color: var(--navy); line-height: 1.25; }
+  .wk-lines { flex: 1 1 auto; min-width: 0; }
+  .wk-b { display: block; font-size: 0.92rem; line-height: 1.4; color: var(--ink-mid); margin-bottom: 5px; }
+  .wk-b:last-child { margin-bottom: 0; }
+  .wk-tag {
+    display: inline-block; font-size: 0.66rem; font-weight: 700;
+    letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-soft);
+    margin-right: 7px;
+  }
+  @media (max-width: 620px) {
+    .weeks { padding-left: 34px; }
+    .weeks::before { left: 13px; }
+    .wk-node { left: -34px; width: 22px; height: 22px; }
+    .wk-node span { font-size: 0.66rem; }
+    .wk-row-content { flex-direction: column; gap: 6px; }
+    .wk-meta { flex-basis: auto; }
+  }
+
+  .flag {
+    margin-top: 12px; padding: 10px 15px; border-radius: 8px;
+    background: var(--teal-light);
+  }
+  .flag p { font-size: 0.92rem; line-height: 1.4; color: var(--ink); margin-bottom: 8px !important; max-width: none; }
+  .flag p:last-child { margin-bottom: 0 !important; }
+  .flag b { font-weight: 600; color: var(--navy); }
+
+  /* progressive disclosure */
+  details.more { margin-top: 16px; border-top: 1px solid var(--rule); }
+  details.more > summary {
+    font-size: 0.85rem; font-weight: 600; color: var(--ink-soft);
+    padding: 10px 0 10px 20px; cursor: pointer; list-style: none; position: relative;
+  }
+  details.more > summary::-webkit-details-marker { display: none; }
+  details.more > summary::before {
+    content: ''; position: absolute; left: 4px; top: 50%;
+    width: 6px; height: 6px; margin-top: -5px;
+    border-right: 2px solid var(--ink-soft); border-bottom: 2px solid var(--ink-soft);
+    transform: rotate(45deg); transition: transform var(--t);
+  }
+  details.more[open] > summary::before { transform: rotate(-135deg); margin-top: -2px; }
+  details.more > summary:hover { color: var(--purple); }
+  .more-body { padding: 0 0 4px; }
+
+  .modes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
+  .mode { background: var(--off-white); border-radius: 8px; padding: 10px 13px; }
+  .mode h5 { font-size: 0.88rem; color: var(--navy); margin-bottom: 2px; }
+  .mode p { font-size: 0.86rem; line-height: 1.35; color: var(--ink-mid); margin: 0 !important; max-width: none; }
+  @media (max-width: 760px) { .modes { grid-template-columns: 1fr; } }
+
+  .tracks { list-style: none; }
+  .tracks li { position: relative; padding: 7px 0 7px 19px; border-bottom: 1px solid var(--rule-soft); font-size: 0.94rem; line-height: 1.4; color: var(--ink-mid); }
+  .tracks li:last-child { border-bottom: none; }
+  .tracks li::before { content: ''; position: absolute; left: 0; top: 14px; width: 8px; height: 8px; border-radius: 50%; background: var(--chip, var(--teal)); }
+  .tracks li b { font-weight: 600; color: var(--navy); }
+
+  /* ---- paths: the field ----
+     Reading order carries the argument. The Fellowship is a discrete step, so
+     it is drawn as one, on the left, with a labelled connector into the field.
+     Everything to the right of that connector has no order and no stops.
+     There is no inner disc: density falls off from the center, so distance
+     from the middle is the only thing depth is encoded in.
+     .fan-list is the text equivalent, read by assistive tech at every width
+     and printed in place of the graphic. */
+  /* Two boxes across the top carry the linear part, then the field sits below
+     at full width. Side by side, the boxes and five multi-line region labels
+     cannot both fit in this column. */
+  .field-rig { position: relative; display: grid; grid-template-columns: 1fr; row-gap: 4px; }
+  .steps { display: flex; align-items: center; gap: 34px; position: relative; z-index: 3; }
+  .rig { display: grid; margin: clamp(18px, 3vw, 30px) 0 clamp(20px, 3vw, 28px); }
+
+  .step-box {
+    display: inline-block; border: 1.5px solid var(--navy); border-radius: 9px;
+    background: var(--paper); padding: 11px 15px;
+    box-shadow: 0 1px 2px rgba(42,42,42,0.05), 0 10px 24px -16px rgba(39,39,124,0.4);
+  }
+  .step-box b { display: block; font-size: 0.95rem; font-weight: 600; letter-spacing: -0.01em; color: var(--navy); line-height: 1.2; }
+  /* second step, same treatment: without a box it reads as one of the field
+     items rather than as the thing that has to happen before them */
+  .step-arrow { flex: 0 0 auto; position: relative; width: 26px; height: 1.5px;
+    background: linear-gradient(to right, rgba(39,39,124,0.5), rgba(39,39,124,0.28)); }
+  .step-arrow::after { content: ''; position: absolute; right: -1px; top: -4px;
+    border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent;
+    border-left: 6px solid rgba(39,39,124,0.42); }
+  .step-box.two { padding: 10px 13px; }
+  .step-box.two b { font-size: 0.85rem; line-height: 1.25; }
+
+  /* the connector is the hinge of the whole panel, so it gets the label */
+  .link-rig { position: absolute; z-index: 2; left: 0; top: 0; pointer-events: none; }
+  .hinge-line, .hinge-line2, .hinge-tip { position: absolute; }
+
+  .orbit-stage {
+    position: relative; width: 100%; max-width: 450px; margin: 0 auto;
+    aspect-ratio: 1.18; touch-action: none; user-select: none; -webkit-user-select: none;
+  }
+  /* closest-side, or the gradient sizes to the corners and tints the box square */
+  .field {
+    position: absolute; left: 50%; top: 50%;
+    width: calc(var(--r-out) * 2.7); height: calc(var(--r-out) * 2.7);
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle closest-side at 50% 50%,
+      rgba(39,39,124,0.34) 0%, rgba(39,39,124,0.26) 14%, rgba(30,175,144,0.22) 34%,
+      rgba(30,175,144,0.15) 54%, rgba(109,230,204,0.09) 70%, rgba(109,230,204,0.03) 86%,
+      rgba(109,230,204,0) 100%);
+  }
+  /* A ring, not a disc. A second filled navy dot beside the marker reads as
+     a second marker; a ring reads as the point everything is measured from. */
+  .core {
+    position: absolute; left: 50%; top: 50%;
+    width: calc(var(--r-core) * 2); height: calc(var(--r-core) * 2);
+    transform: translate(-50%, -50%); border-radius: 50%;
+    border: 2px solid var(--navy); background: transparent;
+  }
+  .lab { position: absolute; display: flex; align-items: center; gap: 7px; max-width: 38%; will-change: opacity; }
+  .lab i { flex: 0 0 auto; width: 7px; height: 7px; border-radius: 50%; background: var(--navy); position: relative; will-change: transform; }
+  /* colour change runs on a stacked layer's opacity, so the frame loop stays
+     off paint and on the compositor */
+  .lab i b { position: absolute; inset: 0; border-radius: 50%; background: var(--teal); opacity: 0; display: block; will-change: opacity; }
+  .lab span { font-size: clamp(0.68rem, 1.25vw, 0.8rem); font-weight: 500; line-height: 1.25; color: var(--navy); }
+  .lab.flip { flex-direction: row-reverse; }
+  .lab.flip span { text-align: right; }
+  .lab.vert { max-width: 62%; }
+  .lab.vert span { text-align: center; }
+  .lab .short { display: none; }
+  .token {
+    position: absolute; left: 0; top: 0; width: 26px; height: 26px; border-radius: 50%;
+    background: var(--navy); border: 3px solid var(--paper);
+    box-shadow: 0 2px 4px rgba(42,42,42,0.10), 0 10px 22px -8px rgba(39,39,124,0.55);
+    will-change: transform; z-index: 5;
+  }
+  .token::after { content: ''; position: absolute; inset: -13px; border-radius: 50%; }
+
+  .orbit-note { font-size: 0.86rem !important; line-height: 1.55 !important; color: var(--ink-soft) !important; }
+  .orbit-note b { color: var(--navy); font-weight: 600; }
+
+  /* Screen readers get the list at every width. It only becomes visible in
+     print, where the graphic is dropped. */
+  .fan-list {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+  .fan-list .hinge { font-weight: 600; color: var(--navy); }
+
+  /* Stacked: the connector turns to run down instead of across, and the stage
+     is inset so the region labels have somewhere to sit. */
+  @media (max-width: 620px) {
+    .steps { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .step-arrow { width: 1.5px; height: 24px; margin-left: 24px;
+      background: linear-gradient(to bottom, rgba(39,39,124,0.5), rgba(39,39,124,0.28)); }
+    .step-arrow::after { right: auto; left: -4px; top: auto; bottom: -1px;
+      border-top: 6px solid rgba(39,39,124,0.42); border-bottom: none;
+      border-left: 4.5px solid transparent; border-right: 4.5px solid transparent; }
+    .lab { max-width: 33%; }
+    .lab.vert { max-width: 76%; }
+    /* a smaller marker buys back the clearance a small stage costs */
+    .token { width: 20px; height: 20px; border-width: 2px; }
+    .lab span { font-size: 0.68rem; }
+    .lab .full { display: none; }
+    .lab .short { display: inline; }
+    /* left-aligned so the right-hand region labels have somewhere to go */
+    .orbit-stage { width: 72%; margin: 0 auto 0 0; }
+    .hinge-lab { transform: translate(0, -50%); text-align: left; }
+  }
+  @media (prefers-contrast: more) {
+    .lab span { color: var(--ink); }
+  }
+
+
+  /* ─────────── SET / OPEN ─────────── */
+  .so { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 6px; }
+  @media (max-width: 800px) { .so { grid-template-columns: 1fr; } }
+  .so-col { padding: 18px 20px; border-radius: 10px; }
+  .so-set { background: var(--off-white); border: 1px solid var(--rule); }
+  .so-open { background: var(--teal-light); border: 1px solid #A9E6D8; }
+  .so-tag { display: inline-block; font-size: 0.72rem; font-weight: 600; padding: 4px 10px; border-radius: 999px; margin-bottom: 10px; }
+  .so-set .so-tag { background: var(--navy); color: #fff; }
+  .so-open .so-tag { background: var(--teal); color: var(--navy); }
+  .so-col h4 { font-size: 1.02rem; color: var(--navy); margin-bottom: 10px; line-height: 1.2; }
+  .so-col ul { list-style: none; }
+  .so-col li { font-size: 0.97rem; line-height: 1.4; color: var(--ink); padding: 9px 0; border-bottom: 1px solid rgba(42,42,42,0.1); }
+  .so-col li:last-child { border-bottom: none; }
+
+  /* ─────────── THE ASK: three questions ─────────── */
+  .asks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 32px; }
+  @media (max-width: 860px) { .asks { grid-template-columns: 1fr; gap: 22px; } }
+  .ask-item { border-top: 3px solid var(--accent); padding-top: 14px; }
+  .ask-item:nth-child(2) { border-top-color: var(--orange); }
+  .ask-item:nth-child(3) { border-top-color: var(--accent-deep); }
+  .ask-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; }
+  .ask-num {
+    font-size: 1.6rem; font-weight: 700; line-height: 1;
+    font-variant-numeric: tabular-nums; color: var(--accent); opacity: 0.38;
+  }
+  .ask-item:nth-child(2) .ask-num { color: var(--orange); }
+  .ask-item:nth-child(3) .ask-num { color: var(--accent-deep); }
+  .ask-item h3 { font-size: 0.95rem; color: var(--ink-soft); font-weight: 600; }
+  .ask-q { font-size: 1.16rem; font-weight: 500; line-height: 1.2; color: var(--navy); margin-bottom: 9px; }
+  .ask-item p { font-size: 0.96rem; line-height: 1.45; color: var(--ink-mid); }
+
+  /* Journey state. Item 01 closed on September 10; 02 and 03 are live.
+     The distinction is carried by the rule weight, a word, and a tick,
+     never by color alone. */
+  .ask-state { font-size: 0.82rem !important; font-weight: 600; line-height: 1.35 !important; color: var(--ink-soft) !important; }
+  .ask-item.done { border-top-style: dotted; border-top-color: var(--rule) !important; }
+  .ask-item.done .ask-num { opacity: 0.22; color: var(--ink-soft) !important; }
+  .ask-item.done .ask-q { color: var(--ink-soft); }
+  .ask-item.done .ask-state::before {
+    content: '\2713'; display: inline-block; margin-right: 6px;
+    font-weight: 700; color: var(--accent);
+  }
+  .ask-item.live .ask-state { color: var(--navy) !important; }
+  .process { margin-top: 34px; padding-top: 18px; border-top: 1px solid var(--rule); font-size: 0.97rem; line-height: 1.5; color: var(--ink-mid); max-width: 44rem; }
+  .process b { font-weight: 600; color: var(--navy); }
+
+  /* ─────────── AGENDA ─────────── */
+  .agenda { margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
+  .card { background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; transition: border-color var(--t); }
+  .card:hover { border-color: #BEBEBE; }
+  .card.locked { background: var(--off-white); border-color: var(--rule); border-left: 3px solid var(--mint); }
+  .card-head { padding: 22px 26px; }
+  @media (max-width: 620px) { .card-head { padding: 18px 17px; } }
+  .card-num { font-size: 0.78rem; font-weight: 600; color: var(--navy); margin-bottom: 5px; display: block; }
+  /* The title is a heading wrapping a button, which is the pattern screen
+     readers handle predictably. Only phrasing content sits inside the button. */
+  .card-h { margin: 0 0 7px; }
+  .card-btn {
+    font-family: var(--sans); font-size: 1.22rem; font-weight: 600;
+    letter-spacing: -0.02em; line-height: 1.15; color: var(--navy);
+    width: 100%; background: none; border: none; text-align: left;
+    padding: 2px 0; cursor: pointer; border-radius: 4px;
+    display: flex; justify-content: space-between; align-items: center; gap: 18px;
+  }
+  .card.locked .card-btn { cursor: default; }
+  .card-btn-r { display: flex; align-items: center; gap: 13px; flex-shrink: 0; }
+  .card-desc { font-size: 1rem; line-height: 1.45; color: var(--ink-mid); max-width: 44rem; }
+  .card-lead { font-size: 0.88rem; color: var(--ink-soft); margin-top: 9px; }
+  .badge { font-size: 0.76rem; font-weight: 600; color: var(--deep-red); white-space: nowrap; }
+  .badge.lock { color: var(--accent-deep); }
+  @media (max-width: 700px) { .badge { display: none; } }
+  .chev { width: 21px; height: 21px; color: var(--ink-soft); transition: transform var(--t), color var(--t); flex-shrink: 0; }
+  .chev svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2; }
+  .card-btn[aria-expanded="true"] .chev { transform: rotate(180deg); color: var(--navy); }
+  .card.locked .chev { display: none; }
+
+  /* 0fr to 1fr animates a natural height with no measurement and no JS, so
+     the card grows out of its own header rather than appearing whole. */
+  .card-body {
+    display: grid; grid-template-rows: 0fr; opacity: 0;
+    border-top: 1px solid transparent;
+    transition: grid-template-rows 0.34s cubic-bezier(0.2,0,0,1), opacity 0.2s ease, border-color 0.2s ease;
+  }
+  .card-body > .body-clip { overflow: hidden; min-height: 0; }
+  .card.open .card-body { grid-template-rows: 1fr; opacity: 1; border-top-color: var(--rule); }
+  .body-inner { padding: 24px 26px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  @media (max-width: 800px) { .body-inner { grid-template-columns: 1fr; gap: 24px; padding: 20px 17px; } }
+  .col h4 { font-size: 0.82rem; font-weight: 600; color: var(--ink-soft); padding-bottom: 7px; border-bottom: 1px solid var(--rule); margin-bottom: 13px; }
+  .col ul { list-style: none; }
+  .col ul li { font-size: 1rem; line-height: 1.45; color: var(--ink); padding: 10px 0; border-bottom: 1px solid var(--rule-soft); }
+  .col ul li:last-child { border-bottom: none; }
+  .qlist { counter-reset: q; }
+  /* .col ul li sets padding via shorthand (padding: 10px 0), which has higher
+     specificity than a bare .qlist li rule and was silently zeroing padding-left,
+     driving the number chip on top of the text. .col .qlist li outranks it cleanly. */
+  .col .qlist li { position: relative; padding-left: 34px; }
+  .qlist li::before {
+    counter-increment: q; content: counter(q);
+    position: absolute; left: 0; top: 9px;
+    width: 20px; height: 20px; line-height: 20px; text-align: center;
+    border-radius: 50%; background: var(--accent-tint);
+    font-size: 0.74rem; font-weight: 700; color: var(--navy);
+  }
+  /* Question 2 carries two audience branches in one numbered item. Each is a
+     block so the split is visible, and the label takes weight so a reader
+     finds their own branch without reading the whole item. */
+  .q-branch { display: block; }
+  .q-branch + .q-branch { margin-top: 11px; }
+  .q-if { font-weight: 600; color: var(--ink); }
+
+  .ask-note { font-size: 0.88rem; line-height: 1.4; color: var(--ink-soft); font-style: italic; margin-bottom: 12px !important; }
+
+  /* Run of show. Times sit in a fixed gutter so the minute marks line up
+     down the left edge and the card reads as a schedule at a glance. */
+  .col .run li { display: flex; gap: 12px; }
+  .run-t {
+    flex: 0 0 38px; font-size: 0.82rem; font-weight: 700; color: var(--accent);
+    font-variant-numeric: tabular-nums; padding-top: 2px;
+  }
+
+  /* prep block: the CTA, given its own shape so it reads as part of the meeting */
+  .prep {
+    grid-column: 1 / -1; background: var(--navy); border-radius: 10px;
+    padding: 22px 24px; display: flex; justify-content: space-between;
+    align-items: center; gap: 22px; flex-wrap: wrap;
+  }
+  .prep-copy { max-width: 34rem; }
+  .prep h4 { font-size: 1.05rem; color: #fff; margin-bottom: 6px; }
+  .prep p { font-size: 0.96rem; line-height: 1.45; color: rgba(255,255,255,0.78); }
+  .prep .mins { color: var(--mint); font-weight: 500; }
+  .btn {
+    font-family: var(--sans); font-size: 0.9rem; font-weight: 600;
+    background: var(--mint); color: var(--navy); text-decoration: none;
+    padding: 12px 22px; border-radius: 999px; white-space: nowrap;
+    transition: background var(--t);
+  }
+  .btn:hover { background: #fff; }
+
+  /* what changed */
+  .heard { grid-column: 1 / -1; background: var(--accent-tint); border-radius: 10px; padding: 20px 22px; }
+  .heard h4 { font-size: 1.05rem; color: var(--navy); margin-bottom: 4px; border: none; padding: 0; }
+  .heard .sub { font-size: 0.94rem; line-height: 1.45; color: var(--ink-mid); margin-bottom: 14px; }
+  .heard .hgroup { margin-bottom: 15px; }
+  .heard .hgroup:last-child { margin-bottom: 0; }
+  .heard .hlabel { font-size: 0.78rem; font-weight: 600; color: var(--navy); margin-bottom: 5px; }
+  .heard ul { list-style: none; }
+  .heard ul li { font-size: 1rem; line-height: 1.4; color: var(--ink); padding: 8px 0; border-bottom: 1px solid rgba(42,42,42,0.1); }
+  .heard ul li:last-child { border-bottom: none; }
+  .heard .note { font-size: 0.95rem; line-height: 1.45; color: var(--ink-mid); margin-top: 12px; }
+
+  /* ─────────── FOOTER ─────────── */
+  .foot { background: var(--navy); color: rgba(255,255,255,0.72); padding: 40px 0 34px; }
+  .foot p { font-size: 0.96rem; line-height: 1.5; }
+  .foot a { color: var(--mint); text-decoration: none; }
+  .foot a:hover { text-decoration: underline; }
+  .foot .fine { margin-top: 16px; font-size: 0.85rem; font-weight: 700; color: var(--coral); }
+  .foot-powered { height: 32px; width: auto; display: block; margin-bottom: 14px; }
+  .foot-powered-print { display: none; }
+
+  /* ─────────── PRINT ─────────── */
+  @media print {
+    .nav, .rail, .chev, .btn, .mast-sessions { display: none !important; }
+    body { background: #fff; color: #000; }
+    .masthead, .foot { background: #fff; color: #000; padding: 0 0 16px; }
+    .masthead h1, .mast-h1 span, .foot a { color: var(--navy) !important; }
+    .mast-logo { display: none; }
+    .mast-logo-print { display: inline; font-weight: 700; }
+    .foot-powered { display: none; }
+    .foot-powered-print { display: inline; font-weight: 700; color: var(--navy); }
+    .foot .fine { color: #333 !important; }
+    .mast-line { color: #333 !important; border-color: #ccc; }
+    .stamp { background: #eee !important; color: #000 !important; }
+    .foot p { color: #333; }
+    .band { padding: 14px 0; }
+    .band-alt, .so-open, .so-set, .flag, .heard, .mode, .stamp { background: #fff !important; border-color: #ddd !important; }
+    .masthead::after { display: none !important; }
+    .prep { background: #fff !important; border: 1px solid #ddd; }
+    .prep h4, .prep p, .prep .mins { color: #000 !important; }
+    .reader { display: block; }
+    .stage { min-height: 0; }
+    .panel { display: block !important; page-break-inside: avoid; padding-bottom: 18px; margin-bottom: 18px; border-bottom: 1px solid #ddd; }
+    details.more > .more-body { display: block !important; }
+    .card-body { grid-template-rows: 1fr !important; opacity: 1 !important; }
+    .card.locked .card-body { display: none !important; }
+    .card { break-inside: avoid; }
+    .rig { display: none; }
+    /* the list is the printed form of the graphic, so it comes out of the
+       screen-reader-only box */
+    .fan-list {
+      position: static; width: auto; height: auto; margin: 10px 0 0;
+      overflow: visible; clip: auto; white-space: normal;
+    }
+    .fan-list li { font-size: 0.95rem; line-height: 1.45; padding: 3px 0; }
+    .wk-node { background: #fff !important; }
+    .weeks::before { border-color: #ccc; }
+    .reveal { opacity: 1 !important; transform: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="mainNav" aria-label="Page sections">
+  <div class="wrap">
+    <div class="nav-mark">Changemakers Steering Committee</div>
+    <div class="nav-links">
+      <a href="#ask">The Journey</a>
+      <a href="#context">Context</a>
+      <a href="#agenda">Sessions</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════ MASTHEAD ═══════════ -->
+<header class="masthead">
+  <div class="wrap">
+    <div class="mast-top">
+      <h1 class="mast-h1">
+        <img class="mast-logo" src="data:image/png;base64,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" alt="Jewish Changemakers" width="386" height="102">
+        <span class="mast-logo-print">Jewish Changemakers</span>
+        <span>Steering Committee</span>
+      </h1>
+      <nav class="mast-sessions" aria-label="Session dates">
+        <a class="ses done" id="step1" href="#agenda">
+          <span class="ses-k">Session 1</span>
+          <span class="ses-d">Thu Sep 10, 2026 &middot; 1:00pm ET</span>
+        </a>
+        <a class="ses current" id="step2" href="#agenda">
+          <span class="ses-k">Session 2</span>
+          <span class="ses-d">Thu Sep 24, 2026 &middot; 1:00pm ET</span>
+        </a>
+      </nav>
+    </div>
+    <p class="mast-line">Session 2: What Happens After the 6 Weeks?</p>
+  </div>
+</header>
+
+<!-- ═══════════ THE ASK ═══════════ -->
+<section class="band" id="ask">
+  <div class="wrap reveal">
+    <h2 class="band-title">What We Need From You</h2>
+    <div class="asks">
+      <div class="ask-item done">
+        <div class="ask-head"><span class="ask-num" aria-hidden="true">01</span><h3>Curriculum</h3></div>
+        <p class="ask-q">What would make six weeks better, not longer?</p>
+        <p class="ask-state">Closed September 10. Now with the program team.</p>
+      </div>
+      <div class="ask-item live">
+        <div class="ask-head"><span class="ask-num" aria-hidden="true">02</span><h3>Handoff and Alumni Engagement</h3></div>
+        <p class="ask-q">What happens between the Fellowship ending and a Fellow staying connected?</p>
+        <p class="ask-state">On the table September 24.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CONTEXT ═══════════ -->
+<section class="band band-alt" id="context">
+  <div class="wrap">
+    <p class="stamp">Prereading Updated</p>
+    <h2 class="band-title">Info on Current Alumni Work</h2>
+    <p class="band-sub">Here's a short recap of Session 1, and some useful context on our Alumni work</p>
+
+    <div class="reader">
+      <div class="rail" role="tablist" aria-label="Context sections">
+        <span class="rail-ind" id="railInd" aria-hidden="true"></span>
+        <button class="rail-btn" role="tab" id="tab-1" aria-controls="panel-1" aria-selected="true" tabindex="0">
+          <span class="rail-num">01</span><span class="rail-label">Session 1 Notes</span><span class="sr-only visited-note"></span>
+        </button>
+        <button class="rail-btn" role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false" tabindex="-1">
+          <span class="rail-num">02</span><span class="rail-label">Partnerships</span><span class="sr-only visited-note"></span>
+        </button>
+        <button class="rail-btn" role="tab" id="tab-3" aria-controls="panel-3" aria-selected="false" tabindex="-1">
+          <span class="rail-num">03</span><span class="rail-label">Experiences</span><span class="sr-only visited-note"></span>
+        </button>
+        <button class="rail-btn" role="tab" id="tab-4" aria-controls="panel-4" aria-selected="false" tabindex="-1">
+          <span class="rail-num">04</span><span class="rail-label">Continued Learning</span><span class="sr-only visited-note"></span>
+        </button>
+      </div>
+
+      <div class="stage">
+
+        <!-- ── 01 ── -->
+        <div class="panel active" id="panel-1" role="tabpanel" aria-labelledby="tab-1" tabindex="0">
+          <h3>Notes from Session 1</h3>
+          <p>On September 10 this group spent an hour on the curriculum. Three clear things came out of it.</p>
+          <p>An introduction to how Federation actually works does belong inside the six weeks, rather than only after them. Likely most impactful when framed as the case for why communal infrastructure is built this way, and not as an "in the weeds" walkthrough of mechanics.</p>
+          <p>Fellows arrive from very different starting points, so the same six themes may need to run at two depths rather than splitting into two curricula. That is being scoped for the winter cohort.</p>
+          <p>The Fellowship says more plainly what leadership can look like. Almost nobody finishes and walks onto a board, and the program should not imply otherwise. A Fellow should finish the experience able to name the ones that fit them, and it's okay if the next step isn't directly at Federation.</p>
+          <p>The program team is working to incorporate these elements into the next version of the Fellowship &mdash; Thank you!</p>
+          <p class="pull">Next, we'll continue the conversation about what happens when the Fellowship ends</p>
+        </div>
+
+        <!-- ── 02 ── -->
+        <div class="panel" id="panel-2" role="tabpanel" aria-labelledby="tab-2" tabindex="0">
+          <h3>Partnerships</h3>
+          <p>Three standing partnerships that give an alum somewhere to go that is neither the Fellowship nor a cold introduction to their local Federation.</p>
+
+          <ul class="weeks">
+            <li class="wk" style="--wkc:var(--teal)">
+              <span class="wk-node" aria-hidden="true"><span>1</span></span>
+              <div class="wk-row-content">
+                <div class="wk-meta"><span class="wk-n">Partnership</span><span class="wk-t">Changemakers &times; Cabinet Leadership Exchange</span></div>
+                <div class="wk-lines">
+                  <span class="wk-b">Mentor pods pairing Changemakers alumni with National Young Leadership Cabinet mentors, building a pathway from Changemakers into Cabinet leadership. Includes a New York cohort with UJA-Federation of New York.</span>
+                </div>
+              </div>
+            </li>
+            <li class="wk" style="--wkc:var(--magenta)">
+              <span class="wk-node" aria-hidden="true"><span>2</span></span>
+              <div class="wk-row-content">
+                <div class="wk-meta"><span class="wk-n">Partnership</span><span class="wk-t">Repair the World &times; Changemakers Ambassadors</span></div>
+                <div class="wk-lines">
+                  <span class="wk-b">A service partnership placing Changemakers alumni into Repair the World's service and justice programming as trained Ambassadors.</span>
+                </div>
+              </div>
+            </li>
+            <li class="wk" style="--wkc:var(--purple)">
+              <span class="wk-node" aria-hidden="true"><span>3</span></span>
+              <div class="wk-row-content">
+                <div class="wk-meta"><span class="wk-n">Partnership</span><span class="wk-t">Root &amp; Rise</span></div>
+                <div class="wk-lines">
+                  <span class="wk-b">Local, Federation-based follow-up experience for alumni after the Fellowship ends. Piloted in a small set of communities.</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- ── 03 ── -->
+        <div class="panel" id="panel-3" role="tabpanel" aria-labelledby="tab-3" tabindex="0">
+          <h3>Experiences</h3>
+          <p>Two in-person moments where alumni act as leaders rather than as participants.</p>
+
+          <ul class="weeks">
+            <li class="wk" style="--wkc:var(--pink)">
+              <span class="wk-node" aria-hidden="true"><span>1</span></span>
+              <div class="wk-row-content">
+                <div class="wk-meta"><span class="wk-n">Experience</span><span class="wk-t">Advocacy Day and Fly-Ins</span></div>
+                <div class="wk-lines">
+                  <span class="wk-b">Alumni join Federation advocacy days in Washington, DC, engaging directly with elected officials on issues affecting the Jewish community.</span>
+                </div>
+              </div>
+            </li>
+            <li class="wk" style="--wkc:var(--coral)">
+              <span class="wk-node" aria-hidden="true"><span>2</span></span>
+              <div class="wk-row-content">
+                <div class="wk-meta"><span class="wk-n">Experience</span><span class="wk-t">GA Changemakers Delegation</span></div>
+                <div class="wk-lines">
+                  <span class="wk-b">A dedicated alumni delegation at JFNA's General Assembly, November 2026 in Washington, DC.</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- ── 04 ── -->
+        <div class="panel" id="panel-4" role="tabpanel" aria-labelledby="tab-4" tabindex="0">
+          <h3>Continued Learning</h3>
+          <p>Two ways an alum keeps building after the Fellowship, both self-paced and open to the whole Network.</p>
+
+          <ul class="weeks">
+            <li class="wk" style="--wkc:var(--navy)">
+              <span class="wk-node" aria-hidden="true"><span>1</span></span>
+              <div class="wk-row-content">
+                <div class="wk-meta"><span class="wk-n">Learning</span><span class="wk-t">Pathways</span></div>
+                <div class="wk-lines">
+                  <span class="wk-b">Self-directed tracks in Community Building, Advocacy, and Giving that take an alum from interest to something they have actually built. Each track pairs learning sessions with an Innovator Leadership Lab, and alumni move at their own pace toward a certificate.</span>
+                </div>
+              </div>
+            </li>
+            <li class="wk" style="--wkc:var(--teal)">
+              <span class="wk-node" aria-hidden="true"><span>2</span></span>
+              <div class="wk-row-content">
+                <div class="wk-meta"><span class="wk-n">Learning</span><span class="wk-t">Facilitator's Training</span></div>
+                <div class="wk-lines">
+                  <span class="wk-b">Four virtual sessions that leave an alum able to run a meeting, tell their own story, and hold a room that does not already agree with them. Titled Impactful Communication for Leadership.</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ AGENDA ═══════════ -->
+<section class="band band-alt" id="agenda">
+  <div class="wrap">
+    <h2 class="band-title">Session Agendas</h2>
+
+    <div class="agenda">
+
+      <!-- ───── SESSION 1 ───── -->
+      <div class="card" id="card1">
+        <div class="card-head">
+          <span class="card-num" id="tag1">Session 1 &middot; Thursday, September 10, 2026 &middot; 1:00pm ET</span>
+          <h3 class="card-h">
+            <button class="card-btn" id="head1" aria-expanded="false" aria-controls="body1">
+              <span>Curriculum Priorities and Federation Collaboration</span>
+              <span class="card-btn-r">
+                <!-- markComplete(1, ...) sets this to the same value. Hard-coded
+                     too so the page is not misleading if the script fails. -->
+                <span class="badge" id="badge1">Complete</span>
+                <span class="chev" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+              </span>
+            </button>
+          </h3>
+          <p class="card-desc">Closed. The curriculum question now sits with the program team, and the record of what this group moved is inside the card.</p>
+        </div>
+        <div class="card-body" id="body1" role="region" aria-labelledby="head1">
+          <div class="body-clip">
+          <div class="body-inner">
+            <div class="col">
+              <h4>What We Covered</h4>
+              <ul>
+                <li>Curriculum: what to deepen, what to give up, and what a Fellow should walk out of week six able to do.</li>
+                <li>What a local Federation needs from the national office when a Fellow finishes and is looking for their next step.</li>
+              </ul>
+            </div>
+            <div class="col">
+              <h4>The Questions We Asked</h4>
+              <ul class="qlist">
+                <li>If you could substantially improve only one part of the six weeks, what would it be, and what would you cut to make room for it?</li>
+                <li>By week six, what should a Fellow be able to do that signals they're headed toward local leadership, not just that they finished the program?</li>
+                <li>What would it actually take for a local federation to engage a Fellow after the program ends, and where does that break down today?</li>
+              </ul>
+            </div>
+            <!-- Populated by markComplete(1, ...). -->
+            <div class="heard" id="heard1" style="display:none;">
+              <h4>What Changed Because of Session 1</h4>
+              <p class="sub">A record of the session, and what it moved.</p>
+              <div class="hgroup" id="heard1HeardWrap" style="display:none;">
+                <div class="hlabel">What We Heard</div>
+                <ul id="heard1Heard"></ul>
+              </div>
+              <div class="hgroup" id="heard1DecidedWrap" style="display:none;">
+                <div class="hlabel">What We Decided</div>
+                <ul id="heard1Decided"></ul>
+              </div>
+              <div class="hgroup" id="heard1NextWrap" style="display:none;">
+                <div class="hlabel">What Session 2 Now Addresses</div>
+                <ul id="heard1Next"></ul>
+              </div>
+              <p class="note" id="heard1Note" style="display:none;"></p>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════════════════
+           SESSION 2 SWAPPABLE BLOCK · START
+           Unlocked and populated on September 16 from what Session 1 settled.
+           The card opens by default because this is now the live session.
+           ═══════════════════════════════════════════════════════════════════ -->
+      <div class="card open" id="card2">
+        <div class="card-head">
+          <span class="card-num" id="tag2">Session 2 &middot; Thursday, September 24, 2026 &middot; 1:00pm ET</span>
+          <h3 class="card-h">
+            <button class="card-btn" id="head2" aria-expanded="true" aria-controls="body2">
+              <span>Alumni Engagement and Federation Readiness</span>
+              <span class="card-btn-r">
+                <span class="badge" id="badge2">Coming up</span>
+                <span class="chev" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+              </span>
+            </button>
+          </h3>
+          <p class="card-desc">How local Federations get ready to receive an alum, and which of the things we already run actually carry someone over years.</p>
+        </div>
+        <div class="card-body" id="body2" role="region" aria-labelledby="head2">
+          <div class="body-clip">
+          <div class="body-inner">
+            <div class="col">
+              <h4>Run of Show</h4>
+              <ul class="run">
+                <li><span class="run-t">0:00</span>Opening, and where Session 1 landed. Janu Mendel.</li>
+                <li><span class="run-t">0:05</span>What exists today after week six. Elie Allen walks the three tracks and describes the handoff as it currently works.</li>
+                <li><span class="run-t">0:15</span>Clarifying questions. Same format as Session 1: questions before advice.</li>
+                <li><span class="run-t">0:25</span>Discussion.</li>
+                <li><span class="run-t">0:50</span>Close, and what happens next.</li>
+              </ul>
+            </div>
+            <div class="col">
+              <h4>Arrive Having Thought About</h4>
+              <ul class="qlist">
+                <li>A list of Changemakers alumni, names and contact information, lands in your inbox tomorrow morning. Walk us through what actually happens next in your community, and where you think it probably stalls.</li>
+                <li><span class="q-branch"><span class="q-if">If you came through Changemakers:</span> what actually pulled you further in after you finished? Was there a moment you were ready to do something and nothing was there?</span><span class="q-branch"><span class="q-if">If you did not:</span> do you have a success story of a young adult you personally kept investing in for more than a year before there was anything in it for your organization (Federation or otherwise)? What kept you going and what would have made you stop?</span></li>
+                <li>Between the handoff itself, the programs we already run for alumni, and the long stretch of years after that nothing currently covers, what should we prioritize this program year, and why (vs. focusing on the others)?</li>
+              </ul>
+            </div>
+            <div class="prep">
+              <div class="prep-copy">
+                <h4>Send Two Answers Before We Meet</h4>
+                <p>Click the link to email Janu your thoughts on the first two. The third we'll take up live. That way we can start the second meeting already in the substance. <span class="mins">About five minutes.</span></p>
+              </div>
+              <!-- Opens a pre-addressed email with the three questions already in the body.
+                   If a form gets built, swap this one href and delete the mailto. -->
+              <a class="btn" id="prep2" href="#" aria-label="Email your Session 2 answers to Janu">Write Your Answers</a>
+            </div>
+            <div class="heard" id="heard2" style="display:none;">
+              <h4>What Changed Because of Session 2</h4>
+              <p class="sub">A record of the session, and what it moved.</p>
+              <div class="hgroup" id="heard2HeardWrap" style="display:none;">
+                <div class="hlabel">What We Heard</div>
+                <ul id="heard2Heard"></ul>
+              </div>
+              <div class="hgroup" id="heard2DecidedWrap" style="display:none;">
+                <div class="hlabel">What We Decided</div>
+                <ul id="heard2Decided"></ul>
+              </div>
+              <div class="hgroup" id="heard2NextWrap" style="display:none;">
+                <div class="hlabel">What Happens Next</div>
+                <ul id="heard2Next"></ul>
+              </div>
+              <p class="note" id="heard2Note" style="display:none;"></p>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      <!-- ═══════════ SESSION 2 SWAPPABLE BLOCK · END ═══════════ -->
+
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <img class="foot-powered" src="data:image/png;base64,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" alt="Powered by Jewish Federations" width="735" height="96">
+    <span class="foot-powered-print">Powered by Jewish Federations</span>
+    <p class="fine">Shared with the Changemakers Steering Committee. Please do not forward this link.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ─── STICKY NAV ─── */
+  var nav = document.getElementById('mainNav');
+  var masthead = document.querySelector('.masthead');
+  /* Two thresholds, not one. A single boundary makes the bar flicker for
+     anyone whose scroll lands on it. */
+  var navShown = false;
+  function navCheck() {
+    var h = masthead.offsetHeight, y = window.scrollY;
+    if (!navShown && y > h * 0.85) { navShown = true; }
+    else if (navShown && y < h * 0.68) { navShown = false; }
+    nav.classList.toggle('visible', navShown);
+  }
+  window.addEventListener('scroll', navCheck, { passive: true });
+  window.addEventListener('resize', navCheck, { passive: true });
+  navCheck();
+
+  /* ─── SCROLL REVEAL. Falls back to visible if the observer is unavailable. ─── */
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(function (el) { io.observe(el); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add('visible'); });
+  }
+
+  /* ═══════════ CONTEXT READER ═══════════ */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.rail-btn'));
+  var PANEL_COUNT = tabs.length;
+
+  /* Which panel opens on load. 1 is the program description.
+     If you want returning members to land somewhere else after Session 1,
+     change this to that panel's number. There are five panels. */
+  var DEFAULT_PANEL = 1;
+
+  /* Reading progress lives only in this variable. No storage, and it resets
+     on reload by design, matching every other piece of state on this page. */
+  var visitedPanels = {};
+
+  /* Rail edge fade + keep the selected tab in view. Hooked into showPanel
+     rather than a click listener, so keyboard arrow navigation scrolls the
+     rail too. The tab is parked away from the edge because the fade would
+     otherwise dim its focus ring. */
+  var rail = document.querySelector('.rail');
+
+  function updateRailFade() {
+    if (!rail) { return; }
+    var scrollable = rail.scrollWidth - rail.clientWidth;
+    if (scrollable < 4) {
+      rail.classList.remove('more-left', 'more-right');
+      return;
+    }
+    rail.classList.toggle('more-left', rail.scrollLeft > 4);
+    rail.classList.toggle('more-right', rail.scrollLeft < scrollable - 4);
+  }
+
+  function revealTab(tab) {
+    if (!rail || rail.scrollWidth - rail.clientWidth < 4) { return; }
+    var rb = rail.getBoundingClientRect();
+    var tb = tab.getBoundingClientRect();
+    var pad = 24;
+    var delta = 0;
+    if (tb.left < rb.left + pad) { delta = tb.left - rb.left - pad; }
+    else if (tb.right > rb.right - pad) { delta = tb.right - rb.right + pad; }
+    if (delta) {
+      rail.scrollBy({ left: delta, behavior: reduceMotion ? 'auto' : 'smooth' });
+    }
+  }
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ─── STAGE HEIGHT SPRING ───
+     Critically damped, so it settles without overshoot, and it always starts
+     from the height that is on screen right now. That is what makes it safe
+     to change panels again mid-transition: the new target is picked up with
+     the current height and velocity intact, so nothing jumps. */
+  var stageEl = document.querySelector('.reader .stage');
+  var hNow = null, hVel = 0, hGoal = 0, hRaf = null, hLast = 0;
+  var H_RESPONSE = 0.34;
+
+  function hTick(now) {
+    var dt = Math.min(48, now - hLast) / 1000; hLast = now;
+    var w = (Math.PI * 2) / H_RESPONSE;
+    hVel += (-w * w * (hNow - hGoal) - 2 * w * hVel) * dt;
+    hNow += hVel * dt;
+    if (Math.abs(hNow - hGoal) < 0.5 && Math.abs(hVel) < 12) {
+      hNow = hGoal; hVel = 0; hRaf = null;
+      stageEl.style.height = '';
+      stageEl.classList.remove('morphing');
+      return;
+    }
+    stageEl.style.height = hNow + 'px';
+    hRaf = requestAnimationFrame(hTick);
+  }
+
+  function morphStage(from, to) {
+    if (reduceMotion || !stageEl) { return; }
+    hNow = from; hGoal = to;
+    stageEl.classList.add('morphing');
+    stageEl.style.height = hNow + 'px';
+    if (!hRaf) { hLast = performance.now(); hRaf = requestAnimationFrame(hTick); }
+  }
+
+  function showPanel(n, moveFocus) {
+    if (n < 1 || n > PANEL_COUNT) { n = DEFAULT_PANEL; }
+    var prev = null;
+    for (var k = 1; k <= PANEL_COUNT; k++) {
+      if (document.getElementById('panel-' + k).classList.contains('active')) { prev = k; }
+    }
+    var fromH = stageEl ? stageEl.getBoundingClientRect().height : 0;
+    visitedPanels[n] = true;
+
+    for (var i = 1; i <= PANEL_COUNT; i++) {
+      var on = (i === n);
+      var tab = document.getElementById('tab-' + i);
+      tab.setAttribute('aria-selected', on ? 'true' : 'false');
+      tab.setAttribute('tabindex', on ? '0' : '-1');   /* roving tabindex */
+      tab.classList.toggle('visited', !!visitedPanels[i] && !on);
+      var note = tab.querySelector('.visited-note');
+      if (note) { note.textContent = (visitedPanels[i] && !on) ? ' — already read' : ''; }
+      var pan = document.getElementById('panel-' + i);
+      pan.classList.remove('entering');
+      pan.classList.toggle('active', on);
+    }
+
+    if (prev && prev !== n && stageEl && !reduceMotion) {
+      var toH = stageEl.getBoundingClientRect().height;
+      var inc = document.getElementById('panel-' + n);
+      inc.classList.add('entering');
+      /* next frame, or the browser coalesces the two opacity values into none */
+      requestAnimationFrame(function () { inc.classList.remove('entering'); });
+      morphStage(fromH, toH);
+    }
+
+    moveIndicator(n);
+    if (moveFocus) { document.getElementById('tab-' + n).focus(); }
+    revealTab(document.getElementById('tab-' + n));
+    updateRailFade();
+    if (window.history && history.replaceState) {
+      history.replaceState(null, '', '#ctx-' + n);
+    }
+  }
+
+  /* One indicator, moved to whichever tab is selected. Vertical rail on wide
+     screens, underline on the horizontal scroller below 900px. */
+  var railInd = document.getElementById('railInd');
+  function moveIndicator(n) {
+    if (!railInd || !rail) { return; }
+    var btn = document.getElementById('tab-' + n);
+    if (!btn) { return; }
+    var horiz = window.matchMedia('(max-width: 900px)').matches;
+    if (horiz) {
+      railInd.style.width = btn.offsetWidth + 'px';
+      railInd.style.height = '';
+      railInd.style.transform = 'translateX(' + btn.offsetLeft + 'px)';
+    } else {
+      railInd.style.height = btn.offsetHeight + 'px';
+      railInd.style.width = '';
+      railInd.style.transform = 'translateY(' + btn.offsetTop + 'px)';
+    }
+  }
+
+  tabs.forEach(function (btn, idx) {
+    btn.addEventListener('click', function () { showPanel(idx + 1); });
+    btn.addEventListener('keydown', function (e) {
+      var target = null;
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { target = (idx + 1) % PANEL_COUNT; }
+      if (e.key === 'ArrowUp'   || e.key === 'ArrowLeft')  { target = (idx - 1 + PANEL_COUNT) % PANEL_COUNT; }
+      if (e.key === 'Home') { target = 0; }
+      if (e.key === 'End')  { target = PANEL_COUNT - 1; }
+      if (target === null) { return; }
+      e.preventDefault();
+      showPanel(target + 1, true);
+    });
+  });
+
+  var hashMatch = /^#ctx-(\d+)$/.exec(window.location.hash);
+  showPanel(hashMatch ? parseInt(hashMatch[1], 10) : DEFAULT_PANEL);
+
+  if (rail) {
+    rail.addEventListener('scroll', updateRailFade, { passive: true });
+    window.addEventListener('resize', function () {
+      updateRailFade();
+      moveIndicator(currentPanel());
+    }, { passive: true });
+    updateRailFade();
+  }
+  function currentPanel() {
+    for (var i = 1; i <= PANEL_COUNT; i++) {
+      if (document.getElementById('panel-' + i).classList.contains('active')) { return i; }
+    }
+    return DEFAULT_PANEL;
+  }
+
+  /* ═══════════ AGENDA CARDS ═══════════ */
+  function toggleCard(n) {
+    var card = document.getElementById('card' + n);
+    if (card.classList.contains('locked')) { return; }   /* locked cards do not open */
+    var head = document.getElementById('head' + n);
+    var open = card.classList.contains('open');
+    card.classList.toggle('open', !open);
+    head.setAttribute('aria-expanded', open ? 'false' : 'true');
+  }
+  [1, 2].forEach(function (n) {
+    document.getElementById('head' + n).addEventListener('click', function () { toggleCard(n); });
+  });
+
+  /* ═══════════ PREP EMAIL ═══════════
+     Builds a mailto with the session's questions already in the body, so a
+     committee member opens their mail app to a half-written message rather
+     than a blank one. Reads the questions straight off the page, so editing
+     a question above updates the email with no other change needed. */
+  var PREP_TO = 'janu.mendel@jewishfederations.org';
+
+  function buildPrepLink(sessionNum) {
+    var link = document.getElementById('prep' + sessionNum);
+    var card = document.getElementById('card' + sessionNum);
+    if (!link || !card) { return; }
+    var qs = Array.prototype.slice.call(card.querySelectorAll('.qlist li'));
+    /* Session 2 asks for the first two only. The third is a live discussion
+       question and is left off the email on purpose. */
+    var lines;
+    if (sessionNum === 2) {
+      qs = qs.slice(0, 2);
+      lines = ['Answers to both, please. No need to write much.', ''];
+    } else {
+      lines = ['Answer any two. No need to write much.', ''];
+    }
+    qs.forEach(function (q, i) {
+      /* innerText, not textContent: question 2's two branches are block
+         children, and textContent would run them together with no break. */
+      var qt = (q.innerText || q.textContent || '').replace(/\n{3,}/g, '\n\n').trim();
+      lines.push((i + 1) + '. ' + qt);
+      lines.push('');
+      lines.push('');
+    });
+    var subject = 'Changemakers Steering Committee · Session ' + sessionNum + ' answers';
+    link.setAttribute(
+      'href',
+      'mailto:' + PREP_TO +
+      '?subject=' + encodeURIComponent(subject) +
+      '&body=' + encodeURIComponent(lines.join('\n'))
+    );
+  }
+  buildPrepLink(1);
+  buildPrepLink(2);
+
+  /* ═══════════ STATE UPDATES ═══════════
+     No browser storage. State changes by editing this file and pushing.
+
+     After each session, call markComplete with whichever groups you have:
+
+       markComplete(1, {
+         heard:    ['...', '...'],
+         decided:  ['...', '...'],
+         next:     ['...'],
+         note:     'Optional closing line.',
+         open:     false
+       });
+
+     markComplete(1, ...) also unlocks the Session 2 card so it can be opened.
+     Every field is optional; empty groups stay hidden. open defaults to true;
+     pass false to leave the finished card collapsed. */
+  function fillList(id, lines) {
+    var wrap = document.getElementById(id + 'Wrap');
+    var list = document.getElementById(id);
+    if (!lines || !lines.length) { return; }
+    list.innerHTML = '';
+    lines.forEach(function (text) {
+      var li = document.createElement('li');
+      li.textContent = text;
+      list.appendChild(li);
+    });
+    wrap.style.display = 'block';
+  }
+
+  function markComplete(sessionNum, data) {
+    data = data || {};
+    var card = document.getElementById('card' + sessionNum);
+    var head = document.getElementById('head' + sessionNum);
+
+    /* data.open defaults to true. Pass open:false for a session whose summary
+       is a record rather than the thing you want people reading first: the
+       card unlocks and can still be expanded by clicking it, it just does not
+       come up already open. */
+    var startOpen = (data.open !== false);
+
+    card.classList.remove('locked');
+    card.classList.toggle('open', startOpen);
+    head.removeAttribute('aria-disabled');
+    head.setAttribute('aria-expanded', String(startOpen));
+
+    var badge = document.getElementById('badge' + sessionNum);
+    badge.className = 'badge';
+    badge.textContent = 'Complete';
+
+    fillList('heard' + sessionNum + 'Heard', data.heard);
+    fillList('heard' + sessionNum + 'Decided', data.decided);
+    fillList('heard' + sessionNum + 'Next', data.next);
+    if (data.note) {
+      var noteEl = document.getElementById('heard' + sessionNum + 'Note');
+      noteEl.textContent = data.note;
+      noteEl.style.display = 'block';
+    }
+    if (data.heard || data.decided || data.next || data.note) {
+      document.getElementById('heard' + sessionNum).style.display = 'block';
+    }
+
+    if (sessionNum === 1) {
+      var card2 = document.getElementById('card2');
+      var head2 = document.getElementById('head2');
+      card2.classList.remove('locked');
+      head2.removeAttribute('aria-disabled');
+      var b2 = document.getElementById('badge2');
+      b2.className = 'badge';
+      b2.textContent = 'Coming up';
+    }
+
+    var step = document.getElementById('step' + sessionNum);
+    step.classList.remove('current');
+    step.classList.add('done');
+    var next = document.getElementById('step' + (sessionNum + 1));
+    if (next && !next.classList.contains('done')) { next.classList.add('current'); }
+  }
+  window.markComplete = markComplete;
+
+  /* ═══════════ THE FIELD (panel 3) ═══════════
+     The marker drifts on its own for a few seconds when the panel first opens
+     and then settles. The drift is a smoothed random walk, not a path: the
+     velocities wander, so no two loads trace the same route, which is the
+     whole point of a diagram arguing there is no fixed route. It plays once
+     rather than looping, because perpetual motion beside body copy is both a
+     distraction and a vestibular problem.
+
+     Dragging still works, and is deliberately unadvertised. Nobody is asked
+     to interact with anything to read this page.
+
+     Everything here is decorative for assistive tech; .fan-list carries the
+     content. Print drops the graphic and shows the list. */
+  (function field(){
+    var stage = document.getElementById('stage');
+    if (!stage) { return; }
+
+    var TAU = Math.PI * 2, D2R = Math.PI / 180;
+    /* Angles keep roughly 110 degrees clear around 180 for the connector, and
+       park the longest strings where there is vertical room rather than in the
+       narrow margin at dead right. */
+    /* The connector now owns the whole left side, so the regions sit across the
+       right. The two on the vertical axis are centred and get the full stage
+       width, which is where the longest strings go. */
+    var REGIONS = [
+      { a: -88, full: 'Committees and volunteer roles',       short: 'Committees' },
+      { a: -40, full: 'Young leadership and affinity groups', short: 'Young leadership' },
+      { a:   0, full: 'Philanthropy, at any level',           short: 'Philanthropy' },
+      { a:  40, full: 'Board service, Federation and beyond', short: 'Board service' },
+      { a:  88, full: 'National Young Leadership (Cabinet, National Women’s Phil etc.)', short: 'National Young Leadership' }
+    ];
+
+    var token   = document.getElementById('token');
+    var labsBox = document.getElementById('labels');
+    var rig     = document.getElementById('fieldRig');
+    var steps   = document.getElementById('steps');
+    var box2    = document.getElementById('step2box');
+    var linkRig = document.getElementById('linkRig');
+    var hLine   = document.getElementById('hLine');
+    var hLine2  = document.getElementById('hLine2');
+    var hTip    = document.getElementById('hTip');
+
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var CX = 0, CY = 0, R_IN = 0, R_OUT = 0, R_LAB = 0;
+    var ang = (Math.random() * 176 - 88) * D2R, rad = 0, vAng = 0, vRad = 0;
+    var raf = null, last = 0, drifting = true, driftT = 0, dragging = false, started = false;
+    var grabDA = 0, grabDR = 0, hist = [];
+
+    /* THETA damps the wander, SIG_* set how far it strays. DECEL matches the
+       deceleration curve used for a flick release. */
+    var DRIFT_MS = 7600, THETA = 1.7, SIG_A = 1.45, SIG_R = 0.85;
+    /* The connector owns roughly 96 degrees on the left, so the marker is
+       reflected at the edges of that lane rather than drifting across the
+       'Known to Their Own Federation' label and reading as nowhere. */
+    var ANG_LIM = 100 * D2R;
+    var DECEL = 0.9975, BOUNDS_RESPONSE = 0.42, RUBBER_C = 0.55;
+
+    var labels = REGIONS.map(function (r) {
+      var el = document.createElement('div');
+      el.className = 'lab';
+      el.innerHTML = '<i><b></b></i><span><span class="full"></span><span class="short"></span></span>';
+      el.querySelector('.full').textContent = r.full;
+      el.querySelector('.short').textContent = r.short;
+      labsBox.appendChild(el);
+      return el;
+    });
+
+    function clamp(v, lo, hi) { return v < lo ? lo : (v > hi ? hi : v); }
+    function rubberband(o, d) { return (o * d * RUBBER_C) / (d + RUBBER_C * Math.abs(o)); }
+    function shortestDelta(a, b) {
+      var d = (a - b) % TAU;
+      if (d > Math.PI) { d -= TAU; }
+      if (d < -Math.PI) { d += TAU; }
+      return d;
+    }
+    function smoothstep(t) { t = clamp(t, 0, 1); return t * t * (3 - 2 * t); }
+    function randn() {
+      var u = 0, v = 0;
+      while (!u) { u = Math.random(); }
+      while (!v) { v = Math.random(); }
+      return Math.sqrt(-2 * Math.log(u)) * Math.cos(TAU * v);
+    }
+
+    function layout() {
+      var sr0 = stage.getBoundingClientRect();
+      var w = sr0.width, hgt = sr0.height;
+      if (!w) { return; }
+      CX = w / 2; CY = hgt / 2;
+      /* On a small stage the marker is a large fraction of the radius, so it
+         reaches the labels before it reaches its bound. Pull the bound in. */
+      var tight = w < 300;
+      R_IN = w * (tight ? 0.115 : 0.090);
+      R_OUT = w * (tight ? 0.170 : 0.220);
+      R_LAB = w * 0.335;
+      stage.style.setProperty('--r-out', R_OUT + 'px');
+      stage.style.setProperty('--r-core', (w * (tight ? 0.032 : 0.026)) + 'px');
+
+      REGIONS.forEach(function (r, i) {
+        var a = r.a * D2R, el = labels[i], ca = Math.cos(a);
+        var flip = ca < -0.2, vert = Math.abs(ca) < 0.2;
+        el.classList.toggle('flip', flip);
+        el.classList.toggle('vert', vert);
+        el.style.left = (CX + Math.cos(a) * R_LAB) + 'px';
+        el.style.top  = (CY + Math.sin(a) * R_LAB) + 'px';
+        el.style.transform = 'translate(' + (flip ? '-100%' : (vert ? '-50%' : '0')) + ', -50%)';
+      });
+
+      /* The connector runs across when there is room and down when the rig
+         has collapsed to one column. */
+      var rb = rig.getBoundingClientRect(), sb = stage.getBoundingClientRect();
+      var b1 = steps.firstElementChild.getBoundingClientRect();
+      var b2 = box2.getBoundingClientRect();
+      var cx = sb.left - rb.left + CX, cy = sb.top - rb.top + CY;
+      var coreR = sb.width * (tight ? 0.032 : 0.026);
+      var b1u = b1;
+      var GRAD_H = 'linear-gradient(to right,rgba(39,39,124,0.5),rgba(39,39,124,0.22))';
+      var GRAD_V = 'linear-gradient(to bottom,rgba(39,39,124,0.5),rgba(39,39,124,0.22))';
+      var TIP_R = 'border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:7px solid rgba(39,39,124,0.42)';
+      /* Down out of the second box, then right into the centre. The regions all
+         sit between -88 and +88 degrees, so the approach from the left is clear
+         and the arrow crosses nothing. */
+      var turnX = b2.left - rb.left + 24;
+      var y0 = b2.bottom - rb.top + 5;
+      hLine.style.cssText = 'left:' + (turnX - 0.75) + 'px;top:' + y0 + 'px;width:1.5px;height:' +
+        Math.max(8, cy - y0) + 'px;background:' + GRAD_V;
+      var x1 = cx - coreR - 9;
+      hLine2.style.cssText = 'left:' + turnX + 'px;top:' + (cy - 0.75) + 'px;width:' +
+        Math.max(10, x1 - turnX - 8) + 'px;height:1.5px;background:' + GRAD_H;
+      hTip.style.cssText = 'left:' + Math.max(turnX, x1 - 8) + 'px;top:' + (cy - 5) + 'px;' + TIP_R;
+
+      if (!rad) { rad = R_IN + (R_OUT - R_IN) * (0.25 + Math.random() * 0.55); }
+      render();
+    }
+
+    function weights() {
+      var FALLOFF = 74 * D2R, out = [];
+      for (var i = 0; i < REGIONS.length; i++) {
+        out.push(smoothstep(1 - Math.abs(shortestDelta(ang, REGIONS[i].a * D2R)) / FALLOFF));
+      }
+      return out;
+    }
+
+    function render() {
+      var x = CX + Math.cos(ang) * rad, y = CY + Math.sin(ang) * rad;
+      token.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0) scale(' + (dragging ? 1.18 : 1) + ') translate(-50%,-50%)';
+
+      var W = weights();
+      for (var i = 0; i < labels.length; i++) {
+        /* 0.68 is the floor because a navy label below it stops clearing AA
+           against the off-white band. Emphasis rides the top third only. */
+        labels[i].style.opacity = (0.68 + 0.32 * W[i]).toFixed(3);
+        var dot = labels[i].firstChild;
+        dot.style.transform = 'scale(' + (0.66 + 0.64 * W[i]).toFixed(3) + ')';
+        dot.firstChild.style.opacity = W[i].toFixed(3);
+      }
+
+    }
+
+    function start() { if (!raf) { last = performance.now(); raf = requestAnimationFrame(tick); } }
+
+    function tick(now) {
+      var dt = Math.min(48, now - last); last = now;
+      var s = dt / 1000, moving = false;
+      if (drifting) {
+        driftT += dt;
+        var force = driftT > DRIFT_MS ? 0 : 1;
+        /* Noise scales with the square root of the timestep, not the timestep.
+           Scaling it linearly makes the random term vanish next to the damping
+           term, and the walk collapses to the same path on every load. */
+        var rt = Math.sqrt(s);
+        vAng += randn() * SIG_A * force * rt - vAng * THETA * s;
+        vRad += randn() * SIG_R * R_OUT * force * rt - vRad * THETA * s;
+        ang += vAng * s;
+        rad += vRad * s;
+        if (ang >  ANG_LIM) { ang =  ANG_LIM; vAng = -Math.abs(vAng) * 0.7; }
+        if (ang < -ANG_LIM) { ang = -ANG_LIM; vAng =  Math.abs(vAng) * 0.7; }
+        if (rad > R_OUT) { rad = R_OUT; vRad = -Math.abs(vRad) * 0.6; }
+        if (rad < R_IN)  { rad = R_IN;  vRad =  Math.abs(vRad) * 0.6; }
+        moving = force > 0 || Math.abs(vAng) > 0.02 || Math.abs(vRad) > 1.2;
+        if (!moving) { drifting = false; vAng = 0; vRad = 0; }
+      } else {
+        if (vAng !== 0) {
+          ang += vAng * s;
+          vAng *= Math.pow(DECEL, dt);
+          if (Math.abs(vAng) < 0.012) { vAng = 0; }
+        }
+        if (rad < R_IN || rad > R_OUT) {
+          var target = rad < R_IN ? R_IN : R_OUT, wr = TAU / BOUNDS_RESPONSE;
+          vRad += (-wr * wr * (rad - target) - 2 * wr * vRad) * s;
+          rad += vRad * s;
+          if (Math.abs(rad - target) < 0.35 && Math.abs(vRad) < 2) { rad = target; vRad = 0; }
+        } else if (vRad !== 0) {
+          rad += vRad * s;
+          vRad *= Math.pow(DECEL, dt);
+          if (Math.abs(vRad) < 1.5) { vRad = 0; }
+        }
+        moving = vAng !== 0 || vRad !== 0 || rad < R_IN - 0.3 || rad > R_OUT + 0.3;
+      }
+      render();
+      raf = moving ? requestAnimationFrame(tick) : null;
+    }
+
+    function polar(e) {
+      var r = stage.getBoundingClientRect();
+      var dx = e.clientX - r.left - CX, dy = e.clientY - r.top - CY;
+      return { a: Math.atan2(dy, dx), r: Math.hypot(dx, dy) };
+    }
+
+    token.addEventListener('pointerdown', function (e) {
+      e.preventDefault();
+      token.setPointerCapture(e.pointerId);
+      dragging = true; drifting = false;
+      if (raf) { cancelAnimationFrame(raf); raf = null; }
+      var p = polar(e);
+      grabDA = shortestDelta(ang, p.a);
+      grabDR = rad - p.r;
+      /* Seed the history with the live velocity so catching a moving marker
+         carries its motion into the drag instead of stopping it dead. */
+      var t0 = performance.now();
+      hist = [{ a: ang - vAng * 0.06, r: rad - vRad * 0.06, t: t0 - 60 }, { a: ang, r: rad, t: t0 }];
+      vAng = 0; vRad = 0;
+      render();
+    });
+
+    token.addEventListener('pointermove', function (e) {
+      if (!dragging) { return; }
+      var p = polar(e);
+      ang += shortestDelta(p.a + grabDA, ang);
+      if (ang >  ANG_LIM) { ang =  ANG_LIM + rubberband(ang - ANG_LIM, ANG_LIM); }
+      if (ang < -ANG_LIM) { ang = -ANG_LIM - rubberband(-ANG_LIM - ang, ANG_LIM); }
+      var wr = p.r + grabDR, band = R_OUT - R_IN;
+      if (wr > R_OUT) { wr = R_OUT + rubberband(wr - R_OUT, band); }
+      else if (wr < R_IN) { wr = R_IN - rubberband(R_IN - wr, band); }
+      rad = wr;
+      var t = performance.now();
+      hist.push({ a: ang, r: rad, t: t });
+      while (hist.length > 2 && t - hist[0].t > 90) { hist.shift(); }
+      render();
+    });
+
+    function release(e) {
+      if (!dragging) { return; }
+      dragging = false;
+      try { token.releasePointerCapture(e.pointerId); } catch (err) {}
+      if (reduce) { vAng = 0; vRad = 0; rad = clamp(rad, R_IN, R_OUT); render(); return; }
+      var f = hist[0], l = hist[hist.length - 1];
+      var dt = Math.max(16, l.t - f.t);
+      vAng = clamp((l.a - f.a) / dt * 1000, -9, 9);
+      vRad = clamp((l.r - f.r) / dt * 1000, -1600, 1600);
+      start(); render();
+    }
+    token.addEventListener('pointerup', release);
+    token.addEventListener('pointercancel', release);
+
+    if ('ResizeObserver' in window) { new ResizeObserver(layout).observe(stage); }
+    else { window.addEventListener('resize', layout); }
+    layout();
+
+    /* Resting position for anyone who has asked for less motion. */
+    function settle() {
+      drifting = false; vAng = 0; vRad = 0;
+      ang = -50 * D2R; rad = R_IN + (R_OUT - R_IN) * 0.55;
+      render();
+    }
+
+    /* The drift is the first thing on the panel that moves, so it waits until
+       the panel is actually on screen rather than playing to nobody. */
+    function begin() {
+      if (started) { return; }
+      started = true;
+      if (reduce) { settle(); } else { start(); }
+    }
+    if (reduce) { settle(); started = true; }
+    else if ('IntersectionObserver' in window) {
+      var fo = new IntersectionObserver(function (es) {
+        es.forEach(function (en) { if (en.isIntersecting) { begin(); fo.disconnect(); } });
+      }, { threshold: 0.25 });
+      fo.observe(stage);
+    } else { setTimeout(begin, 260); }
+  })();
+
+  /* ─── UPDATE LINE. Session 1 is live below. Session 2 is still commented. ─── */
+
+  markComplete(1, {
+    heard: [
+      'A Fellow can finish six weeks without a clear picture of what a Federation is or does, and several members named that as the gap worth closing first',
+      'Fellows arrive at very different starting points, from those who grew up in a Federation family to those who have never heard the word',
+      'The case for federated giving is rarely made philosophically, and a mechanical explanation of allocations does not land with people in their twenties',
+      'Fellows finish assuming leadership means founding something of their own, or else taking a board seat, when most of the real paths are neither'
+    ],
+    decided: [
+      'An introduction to how Federation works belongs inside the six weeks, framed as why communal infrastructure is built this way rather than as how allocations work',
+      'It goes in the asynchronous independent study and the small cohort meetings rather than the full plenary',
+      'The same six themes get scoped to run at two depths rather than splitting into two curricula, piloted in independent study and cohort groups for the winter cohort',
+      'The range of what counts as leadership gets named explicitly: hosting a Shabbat dinner, chairing a committee, public advocacy, volunteering, giving at any level, board service',
+      'The Fellowship stays at six weeks for the winter cohort'
+    ],
+    next: [
+      'Session 2 opens on what a local Federation needs in hand before a Fellow can be invited into anything',
+      'Mentorship during the Fellowship was raised by several members and is carried into Session 2, where it sits alongside the alumni work'
+    ],
+    note: 'Curriculum changes are being scoped now so they reach the winter cohort, which begins in early January.',
+    open: false
+  });
+
+  /* After Session 2, uncomment and fill in. Leave the call above alone.
+
+  markComplete(2, {
+    heard:   ['...'],
+    decided: ['...'],
+    next:    ['...']
+  });
+
+  */
+})();
+</script>
+</body>
+</html>
